@@ -23,7 +23,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Save new Work Type</button>
+            <button type="submit" class="btn btn-primary">Save edited Work Type</button>
 
         </form>
 

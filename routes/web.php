@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
     //restore
     Route::post('/projects/{project:slug}/restore', [ProjectController::class, 'restore'])->name('projects.restore')->withTrashed();
     Route::post('/types/{type:slug}/restore', [TypeController::class, 'restore'])->name('types.restore')->withTrashed();
+    Route::post('/technologies/{technology:slug}/restore', [TechnologyController::class, 'restore'])->name('technologies.restore')->withTrashed();
+
 
     //routes
     Route::resource('types', TypeController::class)->parameters([
@@ -40,6 +43,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('projects', ProjectController::class)->parameters([
         'projects' => 'project:slug'
+    ])->withTrashed(['show', 'edit', 'update', 'destroy']);
+
+    Route::resource('technologies', TechnologyController::class)->parameters([
+        'technologies' => 'technology:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 });
 

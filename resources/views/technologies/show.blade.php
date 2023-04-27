@@ -37,17 +37,17 @@
             <div class="my-type-body">
 
                 <div>
-                    Work Type:
+                    Technology:
                 </div>
     
-                <h5 class="work-type py-4">{{$type->name}}</h5>
+                <h5 class="work-type py-4">{{$technology->name}}</h5>
     
                 <div class="my-row edit">
     
-                    <a href="{{route('types.edit', $type)}}" class="btn btn-sm btn-warning">Edit type</a>
+                    <a href="{{route('technologies.edit', $technology)}}" class="btn btn-sm btn-warning">Edit Technology</a>
     
-                    @if($type->trashed())
-                        <form action="{{ route('types.restore', $type) }}" method="POST">
+                    @if($technology->trashed())
+                        <form action="{{ route('technologies.restore', $technology) }}" method="POST">
                         @csrf
                             <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                         </form>
@@ -56,7 +56,7 @@
                 </div>
     
                 <div class="my-row mt-3">
-                    <form action="{{route('types.destroy', $type)}}" method="POST">
+                    <form action="{{route('technologies.destroy', $technology)}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <input class="btn btn-sm btn-danger" type="submit" value='Delete'>

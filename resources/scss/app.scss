@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
-@import './generals/resets';
+@import './generals/_partials/_resets';
+@import './generals/_partials/_variables';
 @import './generals/my';
+@import './generals/header';
 
 .main-title {
     text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0, 0, 0, 0.15);
