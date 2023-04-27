@@ -1,0 +1,48 @@
+.my-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.my-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.heading {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.details {
+    padding: 1rem 0;
+}
+
+.project-thumb {
+    width: 60px;
+}
+
+.my-card {
+    width: 400px;
+    padding: 2rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 10px;
+}
+
+.my-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.edit {
+    margin-top: 1rem;
+}
+
+.my-type-body {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 1rem;
+}
