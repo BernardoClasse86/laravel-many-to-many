@@ -80,7 +80,7 @@
                     <th>title</th>
                     <th>type</th>
                     <th>client name</th>
-                    <th style="width: 120px">project date</th>
+                    <th>project technologies</th>
                     <th>project link</th>
                     <th>project edit</th>
                     <th>project delete</th>
@@ -100,7 +100,13 @@
                     <td>{{$project->title}}</td>
                     <td>{{$project->type ? $project->type->name : '/'}}</td>
                     <td>{{$project->client_name}}</td>
-                    <td>{{$project->project_date}}</td>
+                    <td>
+                        @forelse ($project->technologies as $technology)
+                            <span class="badge rounded-pill text-bg-dark">{{ $technology->name }}</span>
+                        @empty
+                            <span>/</span>
+                        @endforelse
+                    </td>
                     <td><a class="btn btn-sm btn-secondary" href="{{route('projects.show', $project)}}">Project Link</a></td>
                     <td><a class="btn btn-sm btn-warning" href="{{route('projects.edit', $project)}}">Edit Project</a></td>
                     <td>

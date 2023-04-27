@@ -24,4 +24,19 @@ class Project extends Model
     {
         return $this->belongsTo(Type::class);
     }
+
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
+    }
+
+    public function getSimilarProjects()
+    {
+        return $this->type->projects()->where('id', '!=', $this->id)->get();
+    }
+
+    public function getTechsIds()
+    {
+        return $this->technologies->pluck('id')->all();
+    }
 }

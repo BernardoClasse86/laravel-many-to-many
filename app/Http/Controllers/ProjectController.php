@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Str;
 
@@ -45,7 +46,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -62,6 +65,11 @@ class ProjectController extends Controller
         $validated_data['slug'] = Str::slug($validated_data['title']);
 
         $newProject = Project::create($validated_data);
+
+        if (isset($validated_data['technologies'])) {
+
+            $newProject->technologies()->attach($validated_data['technologies']);
+        }
 
         return to_route('projects.show', $newProject);
     }
@@ -87,7 +95,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -102,10 +112,19 @@ class ProjectController extends Controller
         $validated_data = $request->validated();
 
         if ($validated_data['title'] !== $project->title) {
+
             $validated_data['slug'] = Str::slug($validated_data['title']);
         }
 
         $project->update($validated_data);
+
+        if (isset($validated_data['technologies'])) {
+
+            $project->technologies()->sync($validated_data['technologies']);
+        } else {
+
+            $project->technologies()->sync([]);
+        }
 
         return to_route('projects.show', $project);
     }

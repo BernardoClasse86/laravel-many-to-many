@@ -35,11 +35,11 @@
             <div class="my-row heading">
                 <img class="project-thumb" src="/images/default-project.png" alt="computer-thumb">
                 @if ($project->type)
-                <div><span class="badge text-bg-info">{{$project->type->name}}</span></div>
+                    <div><span class="badge text-bg-info">{{$project->type->name}}</span></div>
                 @endif
 
                 @if ($project->client_name)
-                <div><strong>Client:</strong> {{$project->client_name}}</div>
+                    <div><strong>Client:</strong> {{$project->client_name}}</div>
                 @endif
             </div>
 
@@ -56,6 +56,16 @@
             <div class="my-row">
                 <div class="my-title">
                     {{$project->title}}
+                </div>
+            </div>
+
+            <div class="my-row pb-3">
+                <div class="techs">
+                    @forelse ($project->technologies as $technology)
+                        <span class="badge text-bg-dark">{{$technology->name}}</span>
+                    @empty
+                        
+                    @endforelse
                 </div>
             </div>
 
@@ -98,7 +108,7 @@
 
         <ul class="list-group">
 
-            @foreach($project->type->projects as $work_type)
+            @foreach($project->getSimilarProjects() as $work_type)
 
                 <li class="list-group-item">
 
