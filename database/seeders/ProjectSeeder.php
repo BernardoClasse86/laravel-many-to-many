@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,8 +23,9 @@ class ProjectSeeder extends Seeder
 
         $project_type_ids = Type::all()->pluck('id')->all();
         $project_technology_ids = Technology::all()->pluck('id')->all();
+        $project_user_ids = User::all()->pluck('id')->all();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
 
             $project = new Project();
 
@@ -34,6 +36,7 @@ class ProjectSeeder extends Seeder
             $project->project_date = $faker->dateTimeBetween('-1 year', 'now');
             $project->slug = Str::slug($project->title, '-');
             $project->type_id = $faker->optional()->randomElement($project_type_ids);
+            $project->user_id = $faker->randomElement($project_user_ids);
 
             $project->save();
 

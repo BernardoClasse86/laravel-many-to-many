@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -21,13 +22,15 @@ class ProjectController extends Controller
     {
 
         $trashed_data = $request->input('trashed');
+        $user_id = Auth::id();
 
         if ($trashed_data) {
 
-            $projects = Project::onlyTrashed()->get();
+            $projects = Project::onlyTrashed()->where('user_id', $user_id)->get();
         } else {
 
-            $projects = Project::all();
+            $projects = Project::where('user_id', $user_id)->get();
+            // $projects = Project::all();
         }
 
         $trashed_num = Project::onlyTrashed()->get()->count();
@@ -63,6 +66,7 @@ class ProjectController extends Controller
         $validated_data = $request->validated();
 
         $validated_data['slug'] = Str::slug($validated_data['title']);
+        $validated_data['user_id'] = Auth::id();
 
         $newProject = Project::create($validated_data);
 
@@ -149,6 +153,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
         if ($project->trashed()) {
 
             $project->forceDelete();

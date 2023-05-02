@@ -17,12 +17,18 @@ class Project extends Model
         'project_url',
         'project_date',
         'slug',
-        'type_id'
+        'type_id',
+        'user_id'
     ];
 
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function technologies()
